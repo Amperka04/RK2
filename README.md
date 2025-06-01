@@ -14,6 +14,8 @@
 7. Собранный пакет прикрепить в виде Release к проекту.
 
 
+
+**Начало**
 1. Скопировали нужный файлик *webpage_button.cpp* по заданию по ссылке ![Ссылка](https://github.com/taeguk/GoF-Design-Patterns/tree/master/Behavioral/Command)
 
 2. Отвязали (на всякий) и привязали репозиторий снова. Добавили файл, закоммитили и запушили.
@@ -93,11 +95,13 @@ cmake ..
 
 7. Все в той же build запустили появившиеся файлы для проверки работоспособности проекта
 ```sh ./main_exe ```
+
 Вывод:
 ```Change web page to http://taeguk.me.
 This is generic command. ```
 
 ```sh ./tests ```
+
 Вывод:
 ```
 Running main() from /home/bivan/Amperka04/workspace/projects/RK2/third-party/gtest/googletest/src/gtest_main.cc
@@ -137,9 +141,64 @@ git add .
 git commit -m "Completed steps 1-5: code refactoring, CMake, tests"
 ```
 
+9. Переходим к GitHub Actions. Создали папку и .yml файл со следующим содержанием
+```sh
+mkdir -p .github/workflows
+nano .github/workflows/ci.yml
+```
 
-9. 
+```
+name: CI
 
-10. 
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
 
+jobs:
+  build_and_test:
+    runs-on: ubuntu-latest
 
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+      with:
+        submodules: 'recursive'  
+
+    - name: Install dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y build-essential cmake
+
+    - name: Create build directory
+      run: mkdir build
+
+    - name: Configure CMake
+      working-directory: ./build
+      run: cmake ..
+
+    - name: Build project
+      working-directory: ./build
+      run: cmake --build . --config Release
+
+    - name: Run tests
+      working-directory: ./build
+      run: ./tests
+
+```
+
+10. Добавили workflow в репозиторий
+```sh
+git add .github/workflows/ci.yml
+git commit -m "Add GitHub Actions CI workflow"
+git push origin master
+```
+
+11. Проверили Actions
+
+12. 
+
+13. 
+
+14. 
