@@ -1,10 +1,12 @@
 #RK_2
+
 ##(Краткий отчет)
+
 **Студента группы ИУ8-21, Барш Иван**
 
 Репозиторий рк2: https://github.com/Amperka04/RK2.git
 
-**Задание**
+**Заданиеы к рк**
 1. Добиться, если вдруг это не так, чтобы данный код собирался локально.
 2. вынести все классы, которые используются в шаблоне проектирования в отдельный файл или файлы, чтобы они могли быть протестированы.
 3. Сделать сборочный файл CMakeLists.txt, которой сделает статическую библиотеку с классами шаблона, а также исполняемый файл, как он и представлен в коде.
@@ -202,12 +204,35 @@ git push origin master
 11. Проверили Actions
 (галочка)
 
-12. 
+12. Далее DEB-пакет. В конец CMakeLists.txt допишем 
+```
+set(CPACK_GENERATOR "DEB")
+set(CPACK_PACKAGE_NAME "rk2-patterns")
+set(CPACK_PACKAGE_VERSION "1.0.0")
+set(CPACK_PACKAGE_CONTACT "Your Name <your.email@example.com>")
+set(CPACK_PACKAGE_DESCRIPTION "Command Pattern Implementation")
+set(CPACK_DEBIAN_PACKAGE_MAINTAINER "Your Name")
+set(CPACK_DEBIAN_PACKAGE_DEPENDS "libc6 (>= 2.14)")
+include(CPack)
+```
 
+13. Создали новый файлик для релизов (см код в репозитории)
+```sh
+nano .github/workflows/release.yml
+```
 
-13. 
+14. Зафиксировали измененния
+```sh
+git add .github/workflows/release.yml CMakeLists.txt
+git commit -m "Add release workflow and DEB packaging"
+git push origin master 
+```
 
+15. Добавили тег для релиза
+```sh
+git tag -a v1.0.0 -m "First release"
+git push origin v1.0.0
+```
 
-14. 
 
 
