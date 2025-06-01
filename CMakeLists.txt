@@ -31,3 +31,13 @@ add_executable(tests
 )
 target_link_libraries(tests Patterns gtest gtest_main gmock)
 add_test(NAME AllTests COMMAND tests)
+
+# DEB package configuration
+set(CPACK_GENERATOR "DEB")
+set(CPACK_PACKAGE_NAME "rk2-patterns")
+set(CPACK_PACKAGE_VERSION "1.0.0")
+set(CPACK_PACKAGE_CONTACT "Your Name <your.email@example.com>")
+set(CPACK_PACKAGE_DESCRIPTION "Command Pattern Implementation")
+set(CPACK_DEBIAN_PACKAGE_MAINTAINER "Your Name")
+set(CPACK_DEBIAN_PACKAGE_DEPENDS "libc6 (>= 2.14)")
+include(CPack)

@@ -1,0 +1,70 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+      with:
+        submodules: 'recursive'
+
+    - name: Install dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y build-essential cmake
+
+    - name: Create build directory
+      run: mkdir build
+
+    - name: Configure CMake
+      working-directory: ./build
+      run: cmake ..
+
+    - name: Build project
+      working-directory: ./build
+      run: cmake --build . --config Release
+
+    - name: Run tests
+      working-directory: ./build
+      run: ./tests
+
+    - name: Generate DEB package
+      working-directory: ./build
+      run: cpack
+
+    - name: Upload artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: deb-package
+        path: build/*.deb
+
+  release:
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Download artifact
+      uses: actions/download-artifact@v3
+      with:
+        name: deb-package
+        path: artifacts
+
+    - name: Create Release
+      id: create_release
+      uses: softprops/action-gh-release@v1
+      with:
+        tag_name: ${{ github.ref }}
+        name: Release ${{ github.ref_name }}
+        body: |
+          Automatic release for version ${{ github.ref_name }}
+          DEB package attached
+        files: artifacts/*.deb
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
