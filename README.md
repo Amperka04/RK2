@@ -94,10 +94,12 @@ cmake ..
 ура победа
 
 7. Все в той же build запустили появившиеся файлы для проверки работоспособности проекта
+
 ```sh ./main_exe ```
 
 Вывод:
-```Change web page to http://taeguk.me.
+```
+Change web page to http://taeguk.me.
 This is generic command.
 ```
 
@@ -198,9 +200,14 @@ git push origin master
 ```
 
 11. Проверили Actions
+(галочка)
 
 12. 
 
+
 13. 
 
+
 14. 
+
+
