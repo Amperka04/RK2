@@ -3,7 +3,7 @@ name: Release
 on:
   push:
     tags:
-      - 'v*'  # Запускать при создании тегов вида v1.0.0
+      - 'v*'  # Trigger on tags like v1.0.0
 
 jobs:
   build:
@@ -39,44 +39,43 @@ jobs:
       working-directory: ./build
       run: cpack
 
-    - name: Upload artifact
+    - name: Verify DEB package
+      run: |
+        echo "Generated DEB packages:"
+        ls -lh build/*.deb
+        echo "Package contents:"
+        dpkg -c build/*.deb
+
+    - name: Upload DEB artifact
       uses: actions/upload-artifact@v4
       with:
         name: deb-package
         path: build/*.deb
 
-  create-release:
+  release:
     needs: build
     runs-on: ubuntu-latest
     permissions:
       contents: write
 
     steps:
-    - name: Download artifact
+    - name: Download DEB artifact
       uses: actions/download-artifact@v4
       with:
         name: deb-package
         path: artifacts
 
-    - name: Create Release
-      uses: actions/create-release@v2
+    - name: List downloaded artifacts
+      run: ls -lh artifacts
+
+    - name: Create Release with DEB package
+      uses: softprops/action-gh-release@v1
       with:
         tag_name: ${{ github.ref }}
-        release_name: Release ${{ github.ref_name }}
+        name: Release ${{ github.ref_name }}
         body: |
           Automatic release for version ${{ github.ref_name }}
           DEB package attached
-        draft: false
-        prerelease: false
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-    - name: Upload Release Asset
-      uses: actions/upload-release-asset@v2
-      with:
-        upload_url: ${{ steps.create-release.outputs.upload_url }}
-        asset_path: ./artifacts/*.deb
-        asset_name: rk2-patterns.deb
-        asset_content_type: application/vnd.debian.binary-package
+        files: artifacts/*.deb
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
