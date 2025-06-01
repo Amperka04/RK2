@@ -1,0 +1,45 @@
+name: CI
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Install dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y cmake g++ libgtest-dev build-essential
+
+    - name: Configure and Build
+      run: |
+        mkdir build && cd build
+        cmake .. && make
+
+    - name: Run Tests
+      run: |
+        cd build && ctest --output-on-failure
+
+    - name: Create DEB package
+      run: |
+        mkdir -p RK2/usr/local/bin
+        cp ./build/RK2_main RK2/usr/local/bin/
+        mkdir -p RK2/DEBIAN
+        echo "Package: rk2" > RK2/DEBIAN/control
+        echo "Version: 1.0" >> RK2/DEBIAN/control
+        echo "Architecture: amd64" >> RK2/DEBIAN/control
+        echo "Maintainer: Your Name <your.email@example.com>" >> RK2/DEBIAN/control
+        echo "Description: RK2 Command Pattern Example" >> RK2/DEBIAN/control
+        dpkg-deb --build RK2
+
+    - name: Upload Release
+      uses: softprops/action-gh-release@v1
+      if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
+      with:
+        files: RK2.deb

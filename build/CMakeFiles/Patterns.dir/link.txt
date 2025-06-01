@@ -1,0 +1,2 @@
+/usr/bin/ar qc libPatterns.a CMakeFiles/Patterns.dir/src/WebPageManager.cpp.o CMakeFiles/Patterns.dir/src/ChangeWebPageCommand.cpp.o CMakeFiles/Patterns.dir/src/Button.cpp.o
+/usr/bin/ranlib libPatterns.a

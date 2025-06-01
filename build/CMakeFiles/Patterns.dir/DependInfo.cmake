@@ -1,0 +1,25 @@
+
+# Consider dependencies only in project.
+set(CMAKE_DEPENDS_IN_PROJECT_ONLY OFF)
+
+# The set of languages for which implicit dependencies are needed:
+set(CMAKE_DEPENDS_LANGUAGES
+  )
+
+# The set of dependency files which are needed:
+set(CMAKE_DEPENDS_DEPENDENCY_FILES
+  "/home/bivan/Amperka04/workspace/projects/RK2/src/Button.cpp" "CMakeFiles/Patterns.dir/src/Button.cpp.o" "gcc" "CMakeFiles/Patterns.dir/src/Button.cpp.o.d"
+  "/home/bivan/Amperka04/workspace/projects/RK2/src/ChangeWebPageCommand.cpp" "CMakeFiles/Patterns.dir/src/ChangeWebPageCommand.cpp.o" "gcc" "CMakeFiles/Patterns.dir/src/ChangeWebPageCommand.cpp.o.d"
+  "/home/bivan/Amperka04/workspace/projects/RK2/src/WebPageManager.cpp" "CMakeFiles/Patterns.dir/src/WebPageManager.cpp.o" "gcc" "CMakeFiles/Patterns.dir/src/WebPageManager.cpp.o.d"
+  )
+
+# Targets to which this target links which contain Fortran sources.
+set(CMAKE_Fortran_TARGET_LINKED_INFO_FILES
+  )
+
+# Targets to which this target links which contain Fortran sources.
+set(CMAKE_Fortran_TARGET_FORWARD_LINKED_INFO_FILES
+  )
+
+# Fortran module output directory.
+set(CMAKE_Fortran_TARGET_MODULE_DIR "")

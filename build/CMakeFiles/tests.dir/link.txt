@@ -1,0 +1,1 @@
+/usr/bin/c++ CMakeFiles/tests.dir/tests/WebPageManagerTest.cpp.o CMakeFiles/tests.dir/tests/ChangeWebPageCommandTest.cpp.o CMakeFiles/tests.dir/tests/GenericCommandTest.cpp.o CMakeFiles/tests.dir/tests/ButtonTest.cpp.o -o tests  libPatterns.a lib/libgtest.a lib/libgtest_main.a lib/libgmock.a lib/libgtest.a 
