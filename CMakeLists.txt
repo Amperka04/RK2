@@ -40,4 +40,7 @@ set(CPACK_PACKAGE_CONTACT "Your Name <your.email@example.com>")
 set(CPACK_PACKAGE_DESCRIPTION "Command Pattern Implementation")
 set(CPACK_DEBIAN_PACKAGE_MAINTAINER "Your Name")
 set(CPACK_DEBIAN_PACKAGE_DEPENDS "libc6 (>= 2.14)")
+
+set(CPACK_DEBIAN_FILE_NAME DEB-DEFAULT)
+
 include(CPack)
