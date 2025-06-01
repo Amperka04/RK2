@@ -98,7 +98,9 @@ cmake ..
 
 Вывод:
 ```Change web page to http://taeguk.me.
-This is generic command. ```
+This is generic command.
+```
+
 
 ```sh ./tests ```
 
